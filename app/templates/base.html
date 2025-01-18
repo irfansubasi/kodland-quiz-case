@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}Python Quiz{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    {% block content %} {% endblock %}
+    <footer>
+      <p>Developer: İrfan Subaşı</p>
+    </footer>
+  </body>
+</html>
