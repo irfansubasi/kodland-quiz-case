@@ -81,3 +81,9 @@ def submit_quiz():
                          total=total_questions,
                          percentage=(score/total_questions)*100,
                          answers=answers)
+
+
+@bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('main.index'))
