@@ -14,3 +14,17 @@ class Question(db.Model):
         if self.options:
             return self.options.split(',')
         return None
+    
+class Student(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    scores = db.relationship('Score', backref='student', lazy=True)
+
+
+class Score(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=False)
+    score = db.Column(db.Integer, nullable=False)
+    total_questions = db.Column(db.Integer, nullable=False)
+
+    
