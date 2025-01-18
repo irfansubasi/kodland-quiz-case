@@ -1,0 +1,12 @@
+# Virtual Environment (hala gerekli değil)
+venv/
+env/
+
+# Python cache files (gereksiz)
+__pycache__/
+*.pyc
+
+# IDE specific files (kişisel)
+.idea/
+.vscode/
+.DS_Store
