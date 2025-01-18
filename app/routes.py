@@ -36,3 +36,48 @@ def quiz():
                          student_name=student_name,
                          questions=questions,
                          highest_score=highest_score)
+
+@bp.route('/submit', methods=['POST'])
+def submit_quiz():
+    if 'student_id' not in session:
+        return redirect(url_for('main.index'))
+
+    questions = Question.query.all()
+    total_questions = len(questions)
+    score = 0
+    answers = []
+    
+    for question in questions:
+        user_answer = request.form.get(f'answer_{question.id}', '').strip()
+        correct_answer = question.correct_answer.strip()
+        
+        if question.question_type == 'text_input':
+            is_correct = user_answer.lower() == correct_answer.lower()
+        else:
+            is_correct = user_answer == correct_answer
+            
+        if is_correct:
+            score += 1
+            
+        answers.append({
+            'question': question.question,
+            'user_answer': user_answer,
+            'correct_answer': correct_answer,
+            'is_correct': is_correct,
+            'question_type': question.question_type
+        })
+    
+    new_score = Score(
+        student_id=session['student_id'],
+        score=score,
+        total_questions=total_questions
+    )
+    db.session.add(new_score)
+    db.session.commit()
+    
+    return render_template('result.html',
+                         student_name=session['student_name'],
+                         score=score,
+                         total=total_questions,
+                         percentage=(score/total_questions)*100,
+                         answers=answers)
