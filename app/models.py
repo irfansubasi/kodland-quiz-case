@@ -47,3 +47,47 @@ class Score(db.Model):
             return default_score
             
         return highest
+    
+def init_db():
+    
+    db.create_all()
+    
+    if Question.query.count() == 0:
+        questions = [
+            {
+                "question": "Bilgisayar Görüşü nedir?",
+                "question_type": "multiple_choice",
+                "correct_answer": "Görsel verileri analiz etme",
+                "options": "Ses tanıma,Görsel verileri analiz etme,Yapay zeka algoritmaları,Doğal dil işleme"
+            },
+            {
+                "question": "Python'da bir listeyi sıralamak için hangi metod kullanılır?",
+                "question_type": "text_input",
+                "correct_answer": "sort",
+                "options": None
+            },
+            {
+                "question": "NLP (Doğal Dil İşleme) nedir?",
+                "question_type": "multiple_choice",
+                "correct_answer": "İnsan dilini anlayan yapay zeka",
+                "options": "İnsan dilini anlayan yapay zeka,Görsel tanıma,Sesli komut işleme,Matematiksel modelleme"
+            },
+            {
+                "question": "Hangi Python kütüphanesi, doğal dil işleme (NLP) için yaygın olarak kullanılır?",
+                "question_type": "text_input",
+                "correct_answer": "NLTK",
+                "options": "PyTorch,Scikit-learn,NLTK,NumPy"
+            },
+            {
+                "question": "Python'da bir listeyi tersine çevirmek için kullanılan metodun adını aşağıya yazınız.",
+                "question_type": "text_input",
+                "correct_answer": "reverse",
+                "options": None
+            },
+        ]
+        
+        for q in questions:
+            question = Question(**q)
+            db.session.add(question)
+        
+        db.session.commit()
