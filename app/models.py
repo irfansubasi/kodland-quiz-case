@@ -31,4 +31,19 @@ class Score(db.Model):
     def percentage(self):
         return (self.score / self.total_questions) * 100 if self.total_questions > 0 else 0
 
-    
+    @classmethod
+    def get_highest_score(cls, student_id):
+        highest = cls.query.filter_by(student_id=student_id)\
+            .order_by(desc(cls.score))\
+            .first()
+        
+        if highest is None:
+            
+            default_score = cls(
+                student_id=student_id,
+                score=0,
+                total_questions=Question.query.count() or 1
+            )
+            return default_score
+            
+        return highest
