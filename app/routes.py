@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
-from .models import db, Student
+from .models import db, Student, Score, Question
 
 bp = Blueprint('main', __name__)
 
@@ -20,3 +20,19 @@ def index():
             return redirect(url_for('main.quiz'))
         
     return render_template('index.html')
+
+
+@bp.route('/quiz')
+def quiz():
+    if 'student_id' not in session:
+        return redirect(url_for('main.index'))
+    
+    student_id = session['student_id']
+    student_name = session['student_name']
+    highest_score = Score.get_highest_score(student_id)
+    questions = Question.query.all()
+    
+    return render_template('quiz.html',
+                         student_name=student_name,
+                         questions=questions,
+                         highest_score=highest_score)
