@@ -74,7 +74,7 @@ def init_db():
             },
             {
                 "question": "Hangi Python kütüphanesi, doğal dil işleme (NLP) için yaygın olarak kullanılır?",
-                "question_type": "text_input",
+                "question_type": "multiple_choice",
                 "correct_answer": "NLTK",
                 "options": "PyTorch,Scikit-learn,NLTK,NumPy"
             },
