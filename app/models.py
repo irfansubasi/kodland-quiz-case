@@ -27,4 +27,8 @@ class Score(db.Model):
     score = db.Column(db.Integer, nullable=False)
     total_questions = db.Column(db.Integer, nullable=False)
 
+    @property
+    def percentage(self):
+        return (self.score / self.total_questions) * 100 if self.total_questions > 0 else 0
+
     
