@@ -1,0 +1,48 @@
+{% extends "base.html" %}{% block content %}
+
+<div>
+  <header>
+    <div>
+      <span>Student: {{ student_name }}</span>
+      {% if highest_score %}
+      <span>
+        Your Highest Score: %{{ "%.1f"|format(highest_score.percentage) }}
+      </span>
+      {% endif %}
+    </div>
+  </header>
+
+  <div>
+    <h1>Python Quiz</h1>
+    <form method="POST" action="{{ url_for('main.submit_quiz') }}">
+      {% for question in questions %}
+      <div>
+        <p>{{ loop.index }}. {{ question.question }}</p>
+        <div>
+          {% if question.question_type == 'multiple_choice' %} {% for option in
+          question.get_options() %}
+          <label>
+            <input
+              type="radio"
+              name="answer_{{ question.id }}"
+              value="{{ option }}"
+              required
+            />
+            {{ option }}
+          </label>
+          {% endfor %} {% else %}
+          <input
+            type="text"
+            name="answer_{{ question.id }}"
+            required
+            placeholder="Write your answer"
+          />
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+      <button type="submit">Finish Quiz</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
