@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block content %}
+<div>
+  <h1>Welcome to the Python Quiz</h1>
+  <form method="POST">
+    <div>
+      <label for="student_name">Your Name:</label>
+      <input
+        type="text"
+        id="student_name"
+        name="student_name"
+        required
+        placeholder="Enter your name"
+      />
+    </div>
+    <button type="submit">Start Quiz</button>
+  </form>
+</div>
+{% endblock %}
