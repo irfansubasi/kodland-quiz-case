@@ -12,7 +12,6 @@ def create_app():
     app.register_blueprint(bp)
     
     with app.app_context():
-        db.drop_all() #for development. i'll remove this
         init_db()
     
     return app
