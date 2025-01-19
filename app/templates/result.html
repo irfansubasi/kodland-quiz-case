@@ -2,44 +2,53 @@
 block content %}
 
 <div>
+  <header>
+    <div class="user-data">
+      <span>Student: {{ student_name }}</span>
+      {% if highest_score %}
+      <span>
+        Your Highest Score: %{{ "%.1f"|format(highest_score.percentage) }}
+      </span>
+      {% endif %}
+    </div>
+  </header>
+  <h2>{{ student_name }} - Your Quiz Result</h2>
+
   <div>
-    <h2>{{ student_name }} - Your Quiz Result</h2>
-
     <div>
-      <div>
-        <span>Total Questions:</span>
-        <span>{{ total }}</span>
-      </div>
-      <div>
-        <span>Correct Answers:</span>
-        <span>{{ score }}</span>
-      </div>
-      <div>
-        <span>Success Percentage:</span>
-        <span>{{ "%.1f"|format(percentage) }}%</span>
-      </div>
+      <span>Total Questions:</span>
+      <span>{{ total }}</span>
     </div>
-
     <div>
-      <h3>Detailed Review of Your Answers:</h3>
-      {% for answer in answers %}
-      <div>
-        <p>Question {{ loop.index }}: {{ answer.question }}</p>
-        <div>
-          <p>
-            <strong>Your answer:</strong>
-            {{ answer.user_answer if answer.user_answer else "Left blank" }}
-          </p>
-          <p><strong>Correct answer:</strong> {{ answer.correct_answer }}</p>
-        </div>
-      </div>
-      {% endfor %}
+      <span>Correct Answers:</span>
+      <span>{{ score }}</span>
     </div>
-
     <div>
-      <a href="{{ url_for('main.quiz') }}">Try Again</a>
-      <a href="{{ url_for('main.logout') }}">Go to Home</a>
+      <span>Success Percentage:</span>
+      <span>{{ "%.1f"|format(percentage) }}%</span>
     </div>
   </div>
+
+  <div>
+    <h3>Detailed Review of Your Answers:</h3>
+    {% for answer in answers %}
+    <div>
+      <p>Question {{ loop.index }}: {{ answer.question }}</p>
+      <div>
+        <p>
+          <strong>Your answer:</strong>
+          {{ answer.user_answer if answer.user_answer else "Left blank" }}
+        </p>
+        <p><strong>Correct answer:</strong> {{ answer.correct_answer }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div>
+    <a href="{{ url_for('main.quiz') }}">Try Again</a>
+    <a href="{{ url_for('main.logout') }}">Go to Home</a>
+  </div>
 </div>
+
 {% endblock %}
