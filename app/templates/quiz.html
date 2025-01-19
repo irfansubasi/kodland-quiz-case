@@ -14,11 +14,15 @@
 
   <div>
     <h1>Python Quiz</h1>
-    <form method="POST" action="{{ url_for('main.submit_quiz') }}">
+    <form
+      method="POST"
+      action="{{ url_for('main.submit_quiz') }}"
+      class="questions-section"
+    >
       {% for question in questions %}
-      <div>
+      <div class="question">
         <p>{{ loop.index }}. {{ question.question }}</p>
-        <div>
+        <div class="answer">
           {% if question.question_type == 'multiple_choice' %} {% for option in
           question.get_options() %}
           <label>
