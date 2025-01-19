@@ -74,13 +74,16 @@ def submit_quiz():
     )
     db.session.add(new_score)
     db.session.commit()
+
+    highest_score = Score.get_highest_score(session['student_id'])
     
     return render_template('result.html',
                          student_name=session['student_name'],
                          score=score,
                          total=total_questions,
                          percentage=(score/total_questions)*100,
-                         answers=answers)
+                         answers=answers,
+                         highest_score=highest_score)
 
 
 @bp.route('/logout')
