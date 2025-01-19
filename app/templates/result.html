@@ -1,7 +1,7 @@
 {% extends "base.html" %}{% block title %}Python Quiz - Result{% endblock %} {%
 block content %}
 
-<div>
+<div class="results">
   <header>
     <div class="user-data">
       <span>Student: {{ student_name }}</span>
@@ -29,7 +29,7 @@ block content %}
     </div>
   </div>
 
-  <div>
+  <div class="details">
     <h3>Detailed Review of Your Answers:</h3>
     {% for answer in answers %}
     <div>

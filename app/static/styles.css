@@ -43,6 +43,18 @@ body {
   row-gap: 10px;
 }
 
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.results .details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 footer {
   position: absolute;
   bottom: 0;
